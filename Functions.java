@@ -24,6 +24,12 @@ class Functions
         if(function.equals("tan"))
         return ""+Math.tan(sc.nextDouble());
         
+        if(function.equals("min"))
+        return ""+Math.min(sc.nextDouble(),sc.nextDouble());
+        
+        if(function.equals("max"))
+        return ""+Math.max(sc.nextDouble(),sc.nextDouble());
+        
         if(function.equals("abs"))
         return ""+Math.abs(sc.nextDouble());
         

@@ -11,7 +11,7 @@ class Master
         System.out.println("Order of operations:");
         System.out.println("1.Brackets, 2.Functions, 3.Exponents, 4.Multiplication/Division 5.Addition/Subtraction\n");
         System.out.println("Supported Functions: (Functions must be in lowercase.)");
-        System.out.println("sqrt, exp, ln, sin, cos, tan, abs\n");
+        System.out.println("sqrt, exp, ln, sin, cos, tan, min, max, abs\n");
         System.out.println("Supported Constants: (Constants must in uppercase.)");
         System.out.println("PI, E, H, C");
         System.out.println("Have fun.\n-----------------------");

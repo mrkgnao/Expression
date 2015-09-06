@@ -65,7 +65,7 @@ class Tokenizer
             { State=States.RIGHT_BRACKET; add(temp); temp="";}
             else if(Character.isLetter(c) || c=='-')
             State=States.FUNCTION;
-            else if(c=='+' || c=='_' || c=='*' || c=='/' || c=='^')
+            else if(c=='+' || c=='_' || c=='*' || c=='/' || c=='^' || c==',')
             State=States.OPERATOR;
             else
             State=States.NUMBER;

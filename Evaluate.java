@@ -47,7 +47,7 @@ class Evaluate
         }
         
         //manage binary operations
-        String operators="^/*_+";
+        String operators="^/*_+,";
         int i=0;
         while(i!=operators.length())
         {
