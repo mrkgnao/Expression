@@ -20,7 +20,7 @@ class Master
         String response="";
         while(true)
         {
-            System.out.print(">>> ");
+            System.out.print("\n>>> ");
             try
             {
                 response=br.readLine();
