@@ -10,11 +10,17 @@ class Master
         System.out.println("-------------------------");
         System.out.println("Order of operations:");
         System.out.println("1.Brackets, 2.Functions, 3.Exponents, 4.Multiplication/Division 5.Addition/Subtraction\n");
-        System.out.println("Supported Functions: (Functions must be in lowercase.)");
-        System.out.println("sqrt, exp, ln, sin, cos, tan, min, max, abs\n");
-        System.out.println("Supported Constants: (Constants must in uppercase.)");
-        System.out.println("PI, E, H, C");
-        System.out.println("Have fun.\n-----------------------");
+        System.out.println("Supported Functions:");
+        
+        for(String k:Functions.list)
+        System.out.print(k+", ");
+        
+        System.out.println("\n\nSupported Constants:");
+        
+        for(String[] k:Constants.constants)
+        System.out.print(k[0]+", ");
+        
+        System.out.println("\n\nHave fun.\n-----------------------");
         
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
         String response="";
@@ -41,6 +47,6 @@ class Master
             }
         }
         
-        System.out.println("Hope your homework is finished by now. :-)");
+        System.out.println("----------------------------\nHope your homework is finished by now. :-)");
     }
 }

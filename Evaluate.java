@@ -4,6 +4,16 @@ class Evaluate
 {
     static String eval(ArrayList<String> list)
     {
+        //empty inputs
+        if(list.size()==0)
+        return "";
+        
+        //substitute constants
+        for(int i=0; i<list.size(); i++)
+        for(int j=0; j<Constants.constants.length; j++)
+        if( list.get(i).equals(Constants.constants[j][0]) )
+        list.set(i,Constants.constants[j][1]);
+            
         //manage brackets
         while(true)
         {
@@ -32,10 +42,10 @@ class Evaluate
             int i=-1;
             for(int k=list.size()-1;k>=0;k--)
             {
-                if(Character.isLetter(list.get(k).charAt(0)) || list.get(k).equals("-"))
+                if(Functions.isFunction(list.get(k)))
                 {i=k; break;}
             }
-                
+            
             if(i!=-1)
             {
                 String ans=Functions.evalFunction(list.get(i),list.get(i+1));
@@ -47,7 +57,7 @@ class Evaluate
         }
         
         //manage binary operations
-        String operators="^/*_+,";
+        String operators="!E^/*_+,";
         int i=0;
         while(i!=operators.length())
         {
@@ -67,6 +77,7 @@ class Evaluate
             else
             i++;
         }
+        
         return list.get(0);
     }
     
