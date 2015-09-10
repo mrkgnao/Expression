@@ -6,7 +6,7 @@ class Master
 {
     public static void main() throws IOException
     {
-        System.out.println("Expression Evaluator v1.1");
+        System.out.println("Expression Evaluator v2.0");
         System.out.println("-------------------------");
         System.out.println("Order of operations:");
         System.out.println("1.Brackets, 2.Functions, 3.Exponents, 4.Multiplication/Division 5.Addition/Subtraction\n");
