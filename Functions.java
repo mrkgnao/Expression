@@ -3,7 +3,7 @@ import java.util.Scanner;
 class Functions
 {
     static String[] list={"sqrt","cbrt", "rand", "randInt", "exp", "ln", "log", "logab", "sin", "cos", "tan", "asin", "acos", "atan",
-                       "sinh", "cosh", "tanh", "asinh", "acosh", "atanh", "min", "max", "abs", "-", "sum", "prod", "floor", "ceil", "sign", "round"};
+                       "sinh", "cosh", "tanh", "asinh", "acosh", "atanh", "min", "max", "abs", "-", "sum", "prod", "floor", "ceil", "sign", "round", "fact", "perm", "comb"};
     
     
     static String evalFunction(String function, String arguments)
@@ -12,12 +12,11 @@ class Functions
         
         try
         {
-            String s=sc.next();
-            double x=s.indexOf("x")==-1?Double.parseDouble(s):0;
+            double x=sc.nextDouble();
 
             //general functions
             if(function.equals("sqrt"))
-            return ""+Math.sqrt(x);
+            if(x>=0) return ""+Math.sqrt(x); else return "Square root of negative number is not supported!";
             
             if(function.equals("cbrt"))
             return ""+Math.cbrt(x);
@@ -33,13 +32,13 @@ class Functions
             return ""+Math.exp(x);
             
             if(function.equals("ln"))
-            return ""+Math.log(x);
+            if(x>0) return ""+Math.log(x); else return "Logarithm of negative numbers or zero are not supported.";
             
             if(function.equals("log"))
-            return ""+Math.log(x)/Math.log(10);
+            if(x>0) return ""+Math.log(x)/Math.log(10); else return "Logarithm of negative numbers or zero are not supported.";
             
             if(function.equals("logab"))
-            return ""+Math.log(x)/Math.log(sc.nextDouble());
+            if(x>0) return ""+Math.log(x)/Math.log(sc.nextDouble()); else return "Logarithm of negative numbers or zero are not supported.";
             
             //trigonometric
             if(function.equals("sin"))
@@ -52,10 +51,10 @@ class Functions
             return ""+Math.tan(x);
             
             if(function.equals("asin"))
-            return ""+Math.asin(x);
+            if(x>=-1 && x<=1) return ""+Math.asin(x); else return "sin of a number must lie between -1 and 1.";
             
             if(function.equals("acos"))
-            return ""+Math.acos(x);
+            if(x>=-1 && x<=1) return ""+Math.acos(x); else return "cos of a number must lie between -1 and 1.";
             
             if(function.equals("atan"))
             return ""+Math.atan(x);
@@ -77,7 +76,7 @@ class Functions
             return ""+Math.log(x+Math.sqrt(x*x-1)); 
             
             if(function.equals("atanh"))
-            return ""+0.5*Math.log((x+1)/(x-1));
+            if(x>=-1 && x<=1) return ""+0.5*Math.log((x+1)/(x-1)); else return "tanh of a number must lie between -1 and 1.";
             
             //number theory
             if(function.equals("max"))
@@ -118,6 +117,26 @@ class Functions
                 return ""+prod;
             }
             
+            if(function.equals("fact"))
+            {
+                if(x<0) return "Factorial of negative numbers are not supported!";
+                int p=1;
+                for(int i=1;i<=x;i++) p*=i;
+                return ""+p;
+            }
+            
+            if(function.equals("perm"))
+            {
+                double r=sc.nextDouble(); if(r>x) return "R cannot be greater than N.";
+                return ""+Double.parseDouble(evalFunction("fact",""+x))/Double.parseDouble(evalFunction("fact",""+(x-r)));
+            }
+            
+            if(function.equals("comb"))
+            {
+                double r=sc.nextDouble(); if(r>x) return "R cannot be greater than N.";
+                return ""+Double.parseDouble(evalFunction("perm",x+","+r))/Double.parseDouble(evalFunction("fact",""+r));
+            }
+            
             if(function.equals("floor"))
             return ""+Math.floor(x);
             
@@ -130,20 +149,12 @@ class Functions
             if(function.equals("round"))
             return ""+Math.round(x);
             
-            return "";
+            return "Function is not supported.";
         }
         catch(Exception e)
         {
-            return function+"("+arguments+")";
+            return "Function arguments are not numbers!";
         }
-    }
-    
-    static boolean isFunction(String f)
-    {
-        for(String k:list)
-        if(k.equals(f))
-        return true;
-        return false;
     }
 }
         

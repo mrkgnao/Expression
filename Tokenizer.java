@@ -18,6 +18,9 @@ class Tokenizer
         //for factorials
         s=s.replaceAll("!","!0");
         
+        //for rand() function
+        s=s.replaceAll("rand","rand(0)");
+        
         //take account for implied multiplication
         temp+=s.charAt(0);
         for(int i=1;i<s.length();i++)
@@ -41,7 +44,7 @@ class Tokenizer
             char c=s.charAt(i);
             char d=s.charAt(i-1);
             
-            if(c=='-' && "+*^/,E!(".indexOf(d)==-1)
+            if(c=='-' && "+*^/%,E!(=~<>&|".indexOf(d)==-1)
             {temp+="_"; continue;}
             
             temp+=c;
@@ -68,7 +71,7 @@ class Tokenizer
             { State=States.RIGHT_BRACKET; add(temp); temp="";}
             else if((Character.isLetter(c) && c!='E') || c=='-')
             State=States.FUNCTION;
-            else if("+_*/E,^!".indexOf(c)!=-1)
+            else if("+_*/%E,^!=~<>&|".indexOf(c)!=-1)
             State=States.OPERATOR;
             else
             State=States.NUMBER;

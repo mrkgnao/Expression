@@ -10,9 +10,9 @@ class Evaluate
         
         //substitute constants
         for(int i=0; i<list.size(); i++)
-        for(int j=0; j<Constants.constants.length; j++)
-        if( list.get(i).equals(Constants.constants[j][0]) )
-        list.set(i,Constants.constants[j][1]);
+        for(int j=0; j<Constants.constants.size(); j++)
+        if( list.get(i).equals(Constants.constants.get(j)[0]) )
+        list.set(i,Constants.constants.get(j)[1]);
             
         //manage brackets
         while(true)
@@ -26,9 +26,14 @@ class Evaluate
                 { j=k; break;}
             }
             
-            if(j!=-1)
+            if(i!=-1 && j==-1) {j=list.size(); list.add(")");}
+            if(j<i || (i==-1 && j!=-1)) return "Unmatching brackets.";
+            
+            if(i!=-1)
             {
                 String ans=eval(new ArrayList<String> (list.subList(i+1,j)));
+                if(Character.isLetter(ans.charAt(0)))
+                return ans;
                 list.subList(i+1,j+1).clear();
                 list.set(i,ans);
             }
@@ -36,19 +41,22 @@ class Evaluate
             break;      
         }
         
+        
         //manage functions
         while(true)
         {
             int i=-1;
             for(int k=list.size()-1;k>=0;k--)
             {
-                if(Functions.isFunction(list.get(k)))
+                if(Character.isLetter(list.get(k).charAt(0)) || list.get(k).equals("-"))
                 {i=k; break;}
             }
             
             if(i!=-1)
             {
                 String ans=Functions.evalFunction(list.get(i),list.get(i+1));
+                if(Character.isLetter(ans.charAt(0)))
+                return ans;
                 list.remove(i+1);
                 list.set(i,ans);
             }
@@ -57,8 +65,8 @@ class Evaluate
         }
         
         //manage binary operations
-        String operators="!E^/*_+,";
-        int i=0;
+        String operators="!E^/*_+,=~<>&|";
+        int i=0;          
         while(i!=operators.length())
         {
             int j=-1;
@@ -71,6 +79,8 @@ class Evaluate
             if(j!=-1)
             {
                 String ans=BinaryOperators.evalOperation(list.get(j),list.get(j-1),list.get(j+1));
+                if(Character.isLetter(ans.charAt(0)))
+                return ans;
                 list.remove(j); list.remove(j);
                 list.set(j-1,ans);
             }
@@ -78,6 +88,7 @@ class Evaluate
             i++;
         }
         
+        Constants.constants.set(0, new String[]{"ans",list.get(0)});
         return list.get(0);
     }
     
