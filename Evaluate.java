@@ -65,7 +65,7 @@ class Evaluate
         }
         
         //manage binary operations
-        String operators="!E^/*_+,=~<>&|";
+        String operators="!E^/*%_+,=~<>&|";
         int i=0;          
         while(i!=operators.length())
         {

@@ -58,6 +58,7 @@ class Master
         
         System.out.println("----------------------------\nHope your homework is finished by now. :-)");
         Constants.constants.set(0,new String[]{"ans","0"});
+        Constants.constants.remove(0);
         Constants.write();
     }
     
@@ -65,6 +66,9 @@ class Master
     {
         if(s.endsWith(".0"))
         s=s.substring(0,s.length()-2);
+        
+        if(s.equals("-0"))
+        s="0";
         
         return s;
     }

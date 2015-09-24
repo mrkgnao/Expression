@@ -9,6 +9,9 @@ class Constants
     
     static void load() throws IOException
     {
+        constants.clear();
+        constants.add(new String[]{"ans","0"});
+        
         file.createNewFile();
         Scanner sc=new Scanner(new FileReader(file));
                
@@ -16,9 +19,6 @@ class Constants
         constants.add(new String[]{sc.next(), sc.next()});
         
         sc.close();
-        
-        if(constants.size()==0)
-        constants.add(new String[]{"ans","0"});
     }
     
     static void write() throws IOException
