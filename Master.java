@@ -4,6 +4,8 @@ import java.io.IOException;
 
 class Master
 {
+    static BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+    
     public static void main() throws IOException
     {
         try
@@ -12,25 +14,12 @@ class Master
         catch(Exception e)
         { System.out.println("Error loading constants.txt. Make sure it is written in proper syntax."); return; }
         
-        System.out.println("Expression Evaluator v2.1");
-        System.out.println("-------------------------");
-        System.out.println("Order of operations:");
-        System.out.println("1.Brackets, 2.Functions, 3.Exponents, 4.Multiplication/Division 5.Addition/Subtraction\n");
-        System.out.println("Supported Functions:");
+        System.out.println("Expression Evaluator v3.0");
+        System.out.println("-------------------------------------------------------------------");
+        System.out.println("Type help to get help on the various functions and operators.");
+        System.out.println("Have fun. :-)");
+        System.out.println("-------------------------------------------------------------------");
         
-        
-        
-        for(String k:Functions.list)
-        System.out.print(k+", ");
-        
-        System.out.println("\n\nSupported Constants:");
-        
-        for(String[] k:Constants.constants)
-        System.out.print(k[0]+", ");
-        
-        System.out.println("\n\nHave fun.\n-----------------------");
-        
-        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
         String response="";
         while(true)
         {
@@ -44,8 +33,10 @@ class Master
                 
                 if((response.equalsIgnoreCase("exit") || response.equalsIgnoreCase("quit")))
                 break;
-                else if(response.indexOf("=")!=-1)
+                else if(response.indexOf("=")!=-1 && response.indexOf("==")==-1 && response.indexOf("!=")==-1)
                 set(response);
+                else if(response.equalsIgnoreCase("help"))
+                help();
                 else
                 System.out.println(format(Evaluate.eval(response)));
             }
@@ -56,7 +47,7 @@ class Master
             }
         }
         
-        System.out.println("----------------------------\nHope your homework is finished by now. :-)");
+        System.out.println("-------------------------------------------------------------------\nHope your homework is finished by now. :-)");
         Constants.constants.set(0,new String[]{"ans","0"});
         Constants.constants.remove(0);
         Constants.write();
@@ -99,5 +90,42 @@ class Master
         Constants.constants.add(new String[]{variable, value});
         
         System.out.println("Constant "+variable+" set to "+value+".");
+    }
+    
+    static void help() throws IOException
+    {
+        System.out.println("What do you want help with?");
+        System.out.print("1. Functions, 2. Operators, 3. Constants, 4. Order of operations :");
+        
+        switch(br.readLine().charAt(0))
+        {
+            case '1': System.out.println("\nFunction with syntax\t\t\tPurpose\n-------------------------------------------------------------------");
+                      for(String[] k:Functions.list)
+                      System.out.format("%1$-25s %2$s %n",k[0],k[1]);
+                      break;
+                      
+            case '2': System.out.println("\nOperator with syntax\t\t\tPurpose\n-------------------------------------------------------------------");
+                      for(String[] k:BinaryOperators.list)
+                      System.out.format("%1$-25s %2$s %n",k[0],k[1]);
+                      break;
+                      
+            case '3': System.out.println("\nConstants are stored in the file constants.txt in the same directory as the parent.");
+                      System.out.println("If the file does not exist when the program is started, a blank one will be created.");
+                      System.out.println("To set a constant to a value, type <constant>==<value>. Ex: m==2 or pi==3.");
+                      System.out.println("To delete a constant, set its value to 0.");
+                      System.out.println("The ans constant stores the previous answer.");
+                      System.out.println("The following constants are available with their corresponding values.");
+                      
+                      System.out.println("\nConstant\tValue\n-------------------------------------------------------------------");
+                      for(String[] k:Constants.constants)
+                      System.out.println(k[0]+"\t\t"+k[1]);
+                      break;
+                    
+            case '4': System.out.println("\nThe order of operations are as follows:");
+                      System.out.println("1.Brackets, 2.Functions, 3.Exponents, 4.Multiplication/Division 5.Addition/Subtraction\n");
+                      break;
+                     
+            default: System.out.println("Invalid choice.");
+        }
     }
 }

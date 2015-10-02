@@ -48,7 +48,7 @@ class Evaluate
             int i=-1;
             for(int k=list.size()-1;k>=0;k--)
             {
-                if(Character.isLetter(list.get(k).charAt(0)) || list.get(k).equals("-"))
+                if((Character.isLetter(list.get(k).charAt(0)) || list.get(k).equals("-")) && !list.get(k).equals("E"))
                 {i=k; break;}
             }
             
@@ -65,14 +65,13 @@ class Evaluate
         }
         
         //manage binary operations
-        String operators="!E^/*%_+,=~<>&|";
-        int i=0;          
-        while(i!=operators.length())
+        int i=0;
+        while(i!=BinaryOperators.operators.length())
         {
             int j=-1;
             for(int k=0;k<list.size();k++)
             {
-                if(list.get(k).equals(""+operators.charAt(i)))
+                if(list.get(k).equals(""+BinaryOperators.operators.charAt(i)))
                 {j=k; break;}
             }
             

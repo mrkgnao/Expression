@@ -1,5 +1,17 @@
 class BinaryOperators
 {
+    static String operators="!E^/*%_+,";
+    
+    static String[][] list=
+    {{"a+b","Adds a to b."},
+    {"a-b","Subtracts b form a."},
+    {"a*b","Multiplies a and b."},
+    {"a/b","Divides a by b."},
+    {"a%b","Returns a modulo b."},
+    {"a^b","Returns a to the power b."},
+    {"aEb","Shorthand for a*10^b."},
+    {"a!","Returns the factorial of a."}};
+
     static String evalOperation(String operation, String operand_1,String operand_2)
     {
         try   
@@ -22,12 +34,6 @@ class BinaryOperators
                           for(int i=1;i<=a;i++)
                           p*=i;
                           return ""+p;
-                case '=': return a==b?"1":"0";
-                case '<': return a<b?"1":"0";
-                case '>': return a>b?"1":"0";
-                case '~': return a!=b?"1":"0";
-                case '&': return (a==1)&&(b==1)?"1":"0";
-                case '|': return (a==1)||(b==1)?"1":"0";
                 default: return "";
             }
         }
